@@ -51,15 +51,15 @@ $(function () {
 
   function applyTimeState() {
     $(".time-block").each(function () {
-      var currentHour = current.hour(13);
+      var currentHour = current.hour();
       var hour = parseInt($(this).children(".hour").attr("id"));
-      console.log(currentHour.hour());
+      console.log(currentHour);
 
-      if(hour < currentHour.hour()){ 
+      if(hour < currentHour){ 
         $(this).removeClass("present");
         $(this).removeClass("future");
         $(this).addClass("past");
-      }else if(hour === currentHour.hour()){
+      }else if(hour === currentHour){
         $(this).removeClass("past");
         $(this).removeClass("future");
         $(this).addClass("present");
@@ -68,7 +68,6 @@ $(function () {
         $(this).removeClass("present");
         $(this).addClass("future");
       }
-      
     });
   }
 
