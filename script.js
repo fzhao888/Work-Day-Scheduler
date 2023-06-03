@@ -30,10 +30,10 @@ $(function () {
   // useful when saving the description in local storage?
   //
   saveBtn.on("click",function(event){
-    event.preventDefault();
-    console.log($(this).parent().attr("id")); 
+    event.preventDefault(); 
+
+    var time = $(this).parent().attr("id");//gets the time as "hour-x" 
     var description = $(this).siblings(".description").val(); //gets the text inside the description textarea
-    var time = $(this).parent().attr("id");//gets the time as "hour-x"
 
     localStorage.setItem(time,description);
   });
@@ -47,12 +47,22 @@ $(function () {
   // current hour in 24-hour time?
   //
   var current = dayjs();
-  $("#currentDay").text(current.format("MM/DD/YYYY"));
 
 
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
+  function init(){
+    $(".time-block").each(function(){
+        var time = $(this).attr("id");
+        var text = localStorage.getItem(time);
+        console.log(text);
+        $(this).children(".description").val(text); 
+      }
+    ); 
+  }
+  init();
   // TODO: Add code to display the current date in the header of the page.
+  $("#currentDay").text(current.format("MM/DD/YYYY"));
 });
