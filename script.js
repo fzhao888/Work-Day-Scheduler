@@ -1,21 +1,3 @@
-/***
- * 
- * 
-GIVEN I am using a daily planner to create a schedule
-WHEN I open the planner
-THEN the current day is displayed at the top of the calendar
-WHEN I scroll down
-THEN I am presented with time blocks for standard business hours of 9am to 5pm
-WHEN I view the time blocks for that day
-THEN each time block is color-coded to indicate whether it is in the past, present, or future
-WHEN I click into a time block
-THEN I can enter an event
-WHEN I click the save button for that time block
-THEN the text for that event is saved in local storage
-WHEN I refresh the page
-THEN the saved events persist
- */
-
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
@@ -53,17 +35,16 @@ $(function () {
     $(".time-block").each(function () {
       var currentHour = current.hour();
       var hour = parseInt($(this).children(".hour").attr("id"));
-      console.log(currentHour);
 
-      if(hour < currentHour){ 
+      if (hour < currentHour) {
         $(this).removeClass("present");
         $(this).removeClass("future");
         $(this).addClass("past");
-      }else if(hour === currentHour){
+      } else if (hour === currentHour) {
         $(this).removeClass("past");
         $(this).removeClass("future");
         $(this).addClass("present");
-      }else{
+      } else {
         $(this).removeClass("past");
         $(this).removeClass("present");
         $(this).addClass("future");
@@ -83,18 +64,24 @@ $(function () {
       $(this).children(".description").val(text);
     });
   }
-  // TODO: Add code to display the current date in the header of the page.
-  function displayCurrentTime() {   
+  // TODO: Add code to display the current date in the header of the page. 
+  function displayCurrentTime() {
     var day = current.date();
-    console.log("day: " + day);
-    if(day === 1 || day === 21 || day === 31){
+    var currentHour = current.hour(); 
+
+    if (day === 1 || day === 21 || day === 31) { 
       $("#currentDay").text(current.format("dddd, MMMM D[st]"));
-    }else if(day === 2 || day === 22){
+    } else if (day === 2 || day === 22) {
       $("#currentDay").text(current.format("dddd, MMMM D[nd]"));
-    }else if(day === 3 || day === 23){
+    } else if (day === 3 || day === 23) {
       $("#currentDay").text(current.format("dddd, MMMM D[rd]"));
-    }else{
+    } else {
       $("#currentDay").text(current.format("dddd, MMMM D[th]"));
+    }
+
+    if (currentHour < 9 || currentHour > 17) {
+      var text = $("#currentDay").text();
+      window.alert(" Please come back during the 9am-5pm workday.");  
     }
   }
 
