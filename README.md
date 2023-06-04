@@ -11,7 +11,7 @@ N/A
 
 ## Usage
 
-To use the work day scheduler, simply visit https://fzhao888.github.io/Work-Day-Scheduler/ .  To get started, please type in important events into the colored text area and don't forget to click save to save the important events.  Enjoy!
+To use the work day scheduler, simply visit https://fzhao888.github.io/Work-Day-Scheduler/ .  To get started, please type in important events into the colored text areas. When done, please click save to save the important events.  Enjoy!
 
 Here is a screenshot of the work day scheduler:
 
