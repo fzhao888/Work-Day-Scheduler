@@ -15,13 +15,11 @@ $(function () {
   saveBtn.on("click", function (event) {
     event.preventDefault();
 
-    var time = $(this).parent().attr("id");//gets the time as "hour-x" 
-    var description = $(this).siblings(".description").val(); //gets the text inside the description textarea
+    var time = $(this).parent().attr("id");//stores the time as "hour-x" 
+    var description = $(this).siblings(".description").val(); //stores the text inside the description textarea
 
     localStorage.setItem(time, description);
   });
-
-
 
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
@@ -33,9 +31,10 @@ $(function () {
 
   function applyTimeState() {
     $(".time-block").each(function () {
-      var currentHour = current.hour();
-      var hour = parseInt($(this).children(".hour").attr("id"));
+      var currentHour = current;
+      var hour = parseInt($(this).children(".hour").attr("id")); //gets the 24-hours value from the id
 
+      //sets each time-block to the appropriate time state
       if (hour < currentHour) {
         $(this).removeClass("present");
         $(this).removeClass("future");
@@ -58,6 +57,7 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   function init() {
+    //gets each time-block's description upon refreshing from local storage
     $(".time-block").each(function () {
       var time = $(this).attr("id");
       var text = localStorage.getItem(time);
@@ -69,6 +69,7 @@ $(function () {
     var day = current.date();
     var currentHour = current.hour(); 
 
+    //Display day of month with ordinal 
     if (day === 1 || day === 21 || day === 31) { 
       $("#currentDay").text(current.format("dddd, MMMM D[st]"));
     } else if (day === 2 || day === 22) {
@@ -79,6 +80,7 @@ $(function () {
       $("#currentDay").text(current.format("dddd, MMMM D[th]"));
     }
 
+    //alerts employee  if the current hour is outside of the workday hours
     if (currentHour < 9 || currentHour > 17) {
       var text = $("#currentDay").text();
       window.alert(" Please come back during the 9am-5pm workday.");  
